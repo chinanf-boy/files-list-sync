@@ -1,0 +1,61 @@
+{
+  "name": "files-list-sync",
+  "version": "0.0.0",
+  "description": "get list of file sync",
+  "license": "MIT",
+  "main": "dist/files-list-sync.js",
+  "module": "dist/files-list-sync.m.js",
+  "repository": "chinanf-boy/files-list-sync",
+  "author": {
+    "name": "chinanf-boy",
+    "email": "865501259@qq.com",
+    "url": "http://llever.com"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "npm run build && ava -v",
+    "build": "microbundle build files-list-sync.js",
+    "precommit": "lint-staged",
+    "pub": "npm run test && npm run npmUp && npm run git",
+    "npmUp": "npm version patch && npm publish",
+    "git": "git push && git push --tags"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "dist/files-list-sync.js",
+      "gzip": false
+    }
+  ],
+  "lint-staged": {
+    "linters": {
+      "*.{js,json,css,md}": [
+        "prettier --single-quote --trailing-comma es5 --write",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/dist/*.js"
+    ]
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
+  "keywords": [
+    ""
+  ],
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "husky": "1.0.0-rc.13",
+    "lint-staged": "^7.0.0",
+    "microbundle": "^0.6.0",
+    "prettier": "*"
+  }
+}
