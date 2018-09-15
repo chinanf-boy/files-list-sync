@@ -1,6 +1,6 @@
 {
   "name": "files-list-sync",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "get list of file sync",
   "license": "MIT",
   "main": "dist/files-list-sync.js",
