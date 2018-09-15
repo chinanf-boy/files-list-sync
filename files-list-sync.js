@@ -50,7 +50,6 @@ exports = module.exports = function fileListSync(pathDir, opts) {
   function symbolReal(p) {
     let real = fs.realpathSync(p);
     let t = fs.lstatSync(real);
-    hadPath[real] = true;
     return { t, real };
   }
 
@@ -59,7 +58,6 @@ exports = module.exports = function fileListSync(pathDir, opts) {
     let input = [];
     if (!hadPath[path]) {
       // self
-      hadPath[path] = true;
       let action = 0;
       let type = fs.lstatSync(path);
       if (type.isFile()) {
@@ -86,13 +84,15 @@ exports = module.exports = function fileListSync(pathDir, opts) {
         if (step === 'self') {
           // self read dir get dir-/files
           input = fs.readdirSync(path, 'utf8');
+          hadPath[path] = true; // had check self
         } else {
           // child go deep
-          run(path, upDeep(opts), output);
+          run(path, upDeep(opts), output); // children dir
         }
       } else if (action) {
         // Add file path
         output.push(path);
+        hadPath[path] = true; // had check file self
       }
 
       return input;
