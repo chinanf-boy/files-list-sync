@@ -15,7 +15,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "npm run build && ava -v",
+    "test": "npm run build && ava",
     "build": "microbundle build files-list-sync.js",
     "precommit": "lint-staged",
     "pub": "npm run test && npm run npmUp && npm run git",
